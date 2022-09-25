@@ -74,11 +74,11 @@ app.post("/book-room",function(req,res){
                 rooms.startTime = chk.startTime;
                 rooms.endTime = chk.endTime;
                 rooms.bookedStatus = !rooms.bookedStatus;
-                res.send("Room booked")
+                res.json({message:"Room booked"})
             }
             //Incase Not Available
             else{
-                res.send("This room is already booked.");
+                res.json({message:"This room is already booked."});
             }
         }
         return rooms
@@ -87,7 +87,7 @@ app.post("/book-room",function(req,res){
 
 //3 all rooms with booked data
 app.get("/allrooms",function(req,res){
-    res.send(
+    res.json(
         roomsDet.map((rooms)=>{
             if(rooms.bookedStatus == true){
                 return{
@@ -110,7 +110,7 @@ app.get("/allrooms",function(req,res){
 
 // 4 Get all Customers with booking Rooms 
 app.get("/allcustomers",function(req,res){
-    res.send(
+    res.json(
         roomsDet.filter((rooms)=>{
             if(rooms.bookedStatus == true){
                 return rooms
